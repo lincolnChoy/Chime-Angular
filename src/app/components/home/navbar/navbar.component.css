@@ -1,0 +1,16 @@
+.navBar {
+
+	border : 1px solid white;
+	height : 50px;
+	background : #ADD8E6;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.end {
+	display: flex;
+	min-width: 200px;
+	width: 20%;
+	flex-direction: row;
+	justify-content: space-around
+}
