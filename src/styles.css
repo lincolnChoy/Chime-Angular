@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+	height : 100%;
+}
+
+body {
+	font-family: segoe;
+	margin: 0;
+	padding: 0;
+	height : 100%;
+	width: 100%;
+	background : #ADD8E6;
+
+}
+
+h1 {
+	font-family : segoe;
+}
+
+.form {
+	background-color : rgba(255,255,255,0.1);
+}
+
+@font-face {
+	font-family: segoe;
+	src: url(assets/font.ttf);
+}

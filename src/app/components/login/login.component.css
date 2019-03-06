@@ -1,0 +1,60 @@
+.formPage {
+
+	text-align: center;
+	overflow-y : hidden;
+}
+
+.formButton {
+	border-radius : 80px;
+	cursor : pointer;
+	background : transparent;
+	border-style : solid;
+	border-width : 1px;
+	border-color : white;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	display : inline-block;
+	font-size : 1rem;
+
+}
+
+.formButton:hover {
+	background : #ADD8E6;
+}
+
+.formInput {
+	width : 100%;
+	background : transparent;
+	color : black;
+	border-style : solid;
+	border-width : 1px;
+	border-color : white;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.formInput:hover {
+	background : #ADD8E6;
+}
+
+.formInput:focus {
+	background : #ADD8E6;
+}
+
+.formInput:active {
+	background : #ADD8E6;
+}
+
+.formError {
+
+	font-size: 1rem;
+	background : red;
+	border-radius : 1rem;
+	color : white;
+}
+
+.formLabel {
+	display : block;
+	/*font-weight: 600;*/
+	font-size : 1.25rem;
+}
