@@ -3,6 +3,7 @@ import * as fromApp from '../store/app.reducers';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromAuth from '../auth/store/auth.reducers';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 	private subscription: Subscription;
 
-	constructor(private store: Store<fromApp.AppState>) {}
+	constructor(private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute) {}
 
 	ngOnInit() {
 		
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 				}
 			}
 		)
+		console.log(this.route.snapshot.params['id'], 'params');
 	}
 
 	ngOnDestroy() {
