@@ -21,6 +21,7 @@ import { CustomSpinnerComponent } from './components/shared/customSpinner/custom
 import { HomeModule } from './components/home/home.module';
 import { MaterialThemeModule } from './materialtheme.module';
 import { RegistrationComponent } from './components/register/register.component';
+import { ProfileModule } from './components/profile/profile.module';
 
 @NgModule({
 	declarations: [
@@ -38,6 +39,7 @@ import { RegistrationComponent } from './components/register/register.component'
 		MaterialThemeModule,
 		BrowserAnimationsModule,
 		HomeModule,
+		ProfileModule,
 		StoreModule.forRoot(reducers),
 		EffectsModule.forRoot([ UserEffects, AuthEffects ]),
 	],

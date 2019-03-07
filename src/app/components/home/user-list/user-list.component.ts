@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as fromApp from '../../store/app.reducers';
 import * as fromUsers from './store/users.reducers';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as UserActions from './store/users.actions';
 import * as fromAuth from '../../auth/store/auth.reducers';
 
@@ -11,9 +11,11 @@ import * as fromAuth from '../../auth/store/auth.reducers';
 	templateUrl: './user-list.component.html',
 	styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
 
 	usersState : Observable<fromUsers.State>;
+
+	private subscription: Subscription;
 
 	constructor(private store: Store<fromApp.AppState>) {}
 
@@ -23,14 +25,18 @@ export class UserListComponent implements OnInit {
 		this.usersState = this.store.select('contactList');
 
 		/* Get user credentials and call API to fetch user list */
-		this.store.select('user').subscribe(
+		this.subscription = this.store.select('user').subscribe(
 			(userState: fromAuth.State) => {
-				this.store.dispatch(new UserActions.GetUsers({ id: userState.user['id'], password: userState.user['password'] }));
+				/* Check if user isn't null to prevent error upon logging out */
+				if (userState.user) {
+					this.store.dispatch(new UserActions.GetUsers({ id: userState.user['id'], password: userState.user['password'] }));
+				}
 			}
 		)
-		
-		
-		
+	}
+
+	ngOnDestroy() {
+		this.subscription.unsubscribe();
 	}
 
 }
