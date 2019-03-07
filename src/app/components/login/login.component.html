@@ -25,8 +25,14 @@
                     <p 
                     href = '' className = 'f5 link dim black db pointer'>Register</p>
                 </div>
+
+                <ng-template [ngIf] = "showSpinner">
+                    <app-spinner></app-spinner>
+                </ng-template>
+
+
                 <ng-template [ngIf] = "error">
-                    <span class = 'error pa3 br4'>{{ errorMessage }}</span>
+                    <span class = 'error pa2 errorMessage'>{{ errorMessage }}</span>
                 </ng-template>  
             </div>
 

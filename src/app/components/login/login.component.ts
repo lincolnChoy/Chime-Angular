@@ -11,10 +11,13 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
 	private loginForm: FormGroup;
+
+	/* Booleans for determining the visual state of the login form */
 	private error: boolean = false;
 	private errorMessage: string = '';
+	private showSpinner: boolean = false;
 
-	constructor(private authService: AuthService, private router: Router) {
+	constructor(private authService: AuthService, private router: Router, ) {
 
 	}
 
@@ -38,8 +41,11 @@ export class LoginComponent implements OnInit {
 		} 
 		/* Form is fine */
 		else {
+			this.error = false;
+			this.showSpinner = true;
 			this.authService.login(email, password).subscribe(
 				(resp) => {
+					this.showSpinner = false;
 					if (parseInt(resp['code']) !== 0) {
 	
 						this.error = true;
