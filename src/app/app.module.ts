@@ -20,11 +20,13 @@ import { CustomSpinnerComponent } from './components/shared/customSpinner/custom
 
 import { HomeModule } from './components/home/home.module';
 import { MaterialThemeModule } from './materialtheme.module';
+import { RegistrationComponent } from './components/register/register.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
+		RegistrationComponent,
 		CustomSpinnerComponent
 	],
 	imports: [

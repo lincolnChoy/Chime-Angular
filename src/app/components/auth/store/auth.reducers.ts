@@ -1,14 +1,15 @@
 import * as AuthActions from './auth.actions';
-import { User } from '../../home/user-list/user.model';
 
 export interface State {
     user: {},
-    authenticated: boolean
+    authenticated: boolean,
+    error: number
 }
 
 const initialState: State = {
     user: null,
-    authenticated: false
+    authenticated: false,
+    error: -1
 };
 
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
@@ -31,10 +32,28 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
                     ...action.payload
                 }
             }
+        case AuthActions.TRY_SIGN_UP:
+        return {
+            ...state,
+            user: {
+                ...action.payload
+            }
+        }
         case AuthActions.LOG_OUT:
             return {
+                error: -1,
                 user: null,
                 authenticated: null
+            }
+        case AuthActions.SHOW_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            }
+        case AuthActions.CLEAR_ERROR:
+            return {
+                ...state,
+                error: -1
             }
         default:
             return state;

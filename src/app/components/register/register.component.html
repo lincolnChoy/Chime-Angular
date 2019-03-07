@@ -1,0 +1,58 @@
+<div class = 'formPage'>
+        <div class = 'mt6'>
+            <h1 class = 'f1 white'>Chime</h1>
+            <div class = 'br3 ba shadow-5 b--black-10 mv4 w-100 w-50-m w-25-l mw6 center form'>
+                <div class = 'pa4 black-80'>
+                    <div class = 'ba b--transparent ph0 mh0'>
+                        <div class = 'f2 fw6 ph0 mh0'>Register</div>
+                        <form [formGroup] = "registrationForm">
+
+                            <div class = 'mt3'>
+                                <label class = 'formLabel lh-copy'>First name</label>
+                                <input class = 'pa2 formInput' formControlName = 'first' type = 'text' />
+                            </div>
+
+                            <div class = 'mt3'>
+                                    <label class = 'formLabel lh-copy'>Last name</label>
+                                    <input class = 'pa2 formInput' formControlName = 'last' type = 'text' />
+                            </div>
+
+                            <div class = 'mt3'>
+                                <label class = 'formLabel lh-copy'>Email</label>
+                                <input class = 'pa2 formInput' formControlName = 'email' type = 'email' />
+                            </div>
+
+                            <div class = 'mv3'>
+                                <label class = 'formLabel lh-copy'>Password</label>
+                                <input 
+                                class = 'pa2 formInput' formControlName = 'password' type = 'password' />
+                            </div>
+
+                            <div class = 'mv3'>
+                                    <label class = 'formLabel lh-copy'>Confirm password</label>
+                                    <input 
+                                    class = 'pa2 formInput' formControlName = 'confPassword' type = 'password' />
+                            </div>
+                        </form>
+                    </div>
+    
+                    <button class = 'ph4 pv3 mt2 formButton' (click) = "onSubmit()">Register</button> 
+
+                    <div class = 'lh-copy mt3'>
+                            <p routerLink = "/" class = 'f5 link dim black db pointer'>Have an account? Click here to sign in.</p>
+                    </div>
+    
+                    <ng-template [ngIf] = "showSpinner">
+                        <app-spinner></app-spinner>
+                    </ng-template>
+    
+    
+                    <ng-template [ngIf] = "error">
+                        <span class = 'error pa2 errorMessage'>{{ errorMessage }}</span>
+                    </ng-template>  
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    

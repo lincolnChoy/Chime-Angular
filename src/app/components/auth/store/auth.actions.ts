@@ -8,6 +8,9 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const LOG_OUT = 'LOG_OUT';
 
+export const SHOW_ERROR = 'SHOW_ERROR';
+export const CLEAR_ERROR = 'CLEAR_ERROR';
+
 export class TrySignIn implements Action {
 
     readonly type = TRY_SIGN_IN;
@@ -15,6 +18,15 @@ export class TrySignIn implements Action {
     constructor(public payload: { email: string, password: string}) { }
 
 }
+
+export class TrySignUp implements Action {
+
+    readonly type = TRY_SIGN_UP;
+
+    constructor(public payload: { first: string, last: string, email: string, password: string}) { }
+
+}
+
 
 export class SignIn implements Action {
 
@@ -34,4 +46,14 @@ export class LogOut implements Action {
     readonly type = LOG_OUT;
 }
 
-export type AuthActions = SignIn | SignUp | LogOut | TrySignIn;
+export class ShowError implements Action {
+    readonly type = SHOW_ERROR;
+
+    constructor(public payload: number) { }
+}
+
+export class ClearError implements Action {
+    readonly type = CLEAR_ERROR;
+}
+
+export type AuthActions = SignIn | SignUp | LogOut | TrySignIn | TrySignUp | ShowError | ClearError;

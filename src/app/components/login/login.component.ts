@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import * as fromApp from '../store/app.reducers';
-import { Store } from '@ngrx/store';
+import * as fromAuth from '../auth/store/auth.reducers';
 import * as AuthActions from '../auth/store/auth.actions';
+
+import { errorHandler } from '../shared/errorHandler/errorHandler';
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
 	private loginForm: FormGroup;
 
@@ -20,16 +24,32 @@ export class LoginComponent implements OnInit {
 	private errorMessage: string = '';
 	private showSpinner: boolean = false;
 
-	constructor(private store: Store<fromApp.AppState>, private router: Router, ) {
+	private subscription: Subscription;
 
-	}
+	constructor(private store: Store<fromApp.AppState>, private router: Router) {}
 
 	ngOnInit() {
+
 		this.loginForm = new FormGroup({
 
 			'email' : new FormControl(null, [Validators.required, Validators.email]),
 			'password' : new FormControl(null)
 		});
+
+		this.subscription = this.store.select('user').subscribe(
+            (userState: fromAuth.State) => {
+                if (userState.error !== -1) {
+                    this.showSpinner = false;
+                    this.error = true;
+                    this.errorMessage = errorHandler(userState.error);
+                }
+            }
+        );
+	}
+
+	ngOnDestroy() {
+		this.store.dispatch(new AuthActions.ClearError());
+		this.subscription.unsubscribe();
 	}
 
 	onLogin() {
@@ -47,24 +67,7 @@ export class LoginComponent implements OnInit {
 			this.error = false;
 			this.showSpinner = true;
 			this.store.dispatch(new AuthActions.TrySignIn({ email: email, password: password }));
-			// .subscribe(
-			// 	(resp) => {
-			// 		this.showSpinner = false;
-			// 		if (parseInt(resp['code']) !== 0) {
-	
-			// 			this.error = true;
-			// 			if (parseInt(resp['code']) === 1) {
-	
-			// 				this.errorMessage = 'Incorrect/password email.';
-			// 			}
-			// 		}
-			// 		else {
-			// 			this.authService.authorise();
-			// 			this.router.navigate(['/home'])
-			// 		}
-			// 		console.log(resp);
-			// 	}
-			// );
+
 		}
 
 	}
