@@ -5,26 +5,26 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { AuthService } from './components/auth/auth.service';
-import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './components/auth/auth-guard.service';
-import { NavbarComponent } from './components/home/navbar/navbar.component';
+import { reducers } from './components/store/app.reducers';
+import { UserEffects } from './components/home/user-list/store/users.effects';
+import { AuthEffects } from './components/auth/store/auth.effects';
 
 import { CustomSpinnerComponent } from './components/shared/customSpinner/customSpinner.component';
 
+import { HomeModule } from './components/home/home.module';
 import { MaterialThemeModule } from './materialtheme.module';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
-		HomeComponent,
-		NavbarComponent,
 		CustomSpinnerComponent
 	],
 	imports: [
@@ -34,9 +34,12 @@ import { MaterialThemeModule } from './materialtheme.module';
 		ReactiveFormsModule,
 		HttpClientModule,
 		MaterialThemeModule,
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		HomeModule,
+		StoreModule.forRoot(reducers),
+		EffectsModule.forRoot([ UserEffects, AuthEffects ]),
 	],
-	providers: [ AuthService, AuthGuard ],
+	providers: [ AuthGuard ],
 	bootstrap: [ AppComponent ]
 })
 export class AppModule { }

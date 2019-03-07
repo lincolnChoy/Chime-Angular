@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import * as fromApp from '../store/app.reducers';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../auth/store/auth.actions';
 
 @Component({
 	selector: 'app-login',
@@ -17,7 +20,7 @@ export class LoginComponent implements OnInit {
 	private errorMessage: string = '';
 	private showSpinner: boolean = false;
 
-	constructor(private authService: AuthService, private router: Router, ) {
+	constructor(private store: Store<fromApp.AppState>, private router: Router, ) {
 
 	}
 
@@ -43,24 +46,25 @@ export class LoginComponent implements OnInit {
 		else {
 			this.error = false;
 			this.showSpinner = true;
-			this.authService.login(email, password).subscribe(
-				(resp) => {
-					this.showSpinner = false;
-					if (parseInt(resp['code']) !== 0) {
+			this.store.dispatch(new AuthActions.TrySignIn({ email: email, password: password }));
+			// .subscribe(
+			// 	(resp) => {
+			// 		this.showSpinner = false;
+			// 		if (parseInt(resp['code']) !== 0) {
 	
-						this.error = true;
-						if (parseInt(resp['code']) === 1) {
+			// 			this.error = true;
+			// 			if (parseInt(resp['code']) === 1) {
 	
-							this.errorMessage = 'Incorrect/password email.';
-						}
-					}
-					else {
-						this.authService.authorise();
-						this.router.navigate(['/home'])
-					}
-					console.log(resp);
-				}
-			);
+			// 				this.errorMessage = 'Incorrect/password email.';
+			// 			}
+			// 		}
+			// 		else {
+			// 			this.authService.authorise();
+			// 			this.router.navigate(['/home'])
+			// 		}
+			// 		console.log(resp);
+			// 	}
+			// );
 		}
 
 	}
