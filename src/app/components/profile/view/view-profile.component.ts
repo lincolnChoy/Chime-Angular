@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { Store } from '@ngrx/store';
@@ -21,6 +21,8 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 	private subscription: Subscription;
 
 	private profile: any = null;
+	private loggedUserID : number = -1;
+	private profileID : number = -2;
 
 	constructor(private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute) {}
 
@@ -28,38 +30,43 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		
 
-		/* Get user credentials and call API to fetch user-profile */
+		this.profileID = this.route.snapshot.params['id'];
+		this.store.dispatch(new ProfileActions.GetProfile(this.profileID));
+
 		this.subscription = this.store.select('user').subscribe(
 			(userState: fromAuth.State) => {
-				/* Check if user isn't null to prevent error upon logging out */
 				if (userState.user) {
-					this.store.dispatch(new ProfileActions.GetProfile(userState.user['id']));
-					
+					this.loggedUserID = userState.user['id'];
 				}
 			}
 		)
-		
+
 		this.subscription.add(this.store.select('profile').subscribe(
 			(profileState: fromProfile.State) => {
-				
-				this.profile = profileState.profile;
-				console.log(profileState.profile);
+				if (profileState.profile) {
+					this.profile = profileState.profile;
+				}
 			}
 		));
 	
 	}
 
 	ngOnDestroy() {
+		this.store.dispatch(new ProfileActions.ClearProfile());
 		this.subscription.unsubscribe();
 	}
 
+	isViewingSelf() {
+		return (this.loggedUserID == this.profileID);
+	}
+
 	getFullName() {
-		
-		if (this.profile) {
+
+		if (this.profile.first !== null) {
 			return `${this.profile.first} ${this.profile.last}`;
 		}
 		else {
-			return null;
+			return '';
 		}
 	}
 

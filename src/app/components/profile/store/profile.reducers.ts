@@ -1,11 +1,25 @@
 import * as ProfileActions from './profile.actions';
 
 export interface State {
-    profile: any
+    profile: {
+        id: number,
+        first: string,
+        last: string,
+        occupation: string,
+        blurb: string,
+        picture: string
+    }
 }
 
 const initialState: State = {
-    profile: null
+    profile: {
+        id: null,
+        first: null,
+        last: null,
+        occupation: null,
+        blurb: null,
+        picture: null
+    }
 }
 
 export function profileReducer(state = initialState, action: ProfileActions.ProfileActions) {
@@ -20,6 +34,8 @@ export function profileReducer(state = initialState, action: ProfileActions.Prof
                 ...state,
                 profile: action.payload
             }
+        case ProfileActions.CLEAR_PROFILE:
+            return initialState;
         default:
             return state;
     }

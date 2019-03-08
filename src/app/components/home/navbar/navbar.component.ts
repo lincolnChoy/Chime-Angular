@@ -34,7 +34,7 @@ export class NavbarComponent {
 	}
 	
 	visitProfile() {
-		this.router.navigate([`/profile/self`]);
+		this.router.navigate([`/profile/${this.id}`]);
 	}
 
 }

@@ -1,4 +1,4 @@
-<div class = "container pa2">
+<div class = "container ma3 pa3">
     <div class = "header pa5 w-60">
         <div>
             <h1 class = "tc">{{ getFullName() }}</h1>
@@ -12,26 +12,28 @@
     <div class = "mt3 body w-60">
         <div class = 'pa3'>
             <p>
-                    <strong>About me :</strong>
+                    <strong>About me : </strong>
                     {{ profile.blurb }}
                 </p>
         
                 <p>
-                    <strong>Occupation :</strong>
+                    <strong>Occupation : </strong>
                         {{ profile.occupation }}
                     </p>
                 <p>
         
                 <p>
-                    <strong>Location :</strong>
+                    <strong>Location : </strong>
                         {{ profile.location }}
                     </p>
                 <p>
-                    <strong>D.O.B</strong>
+                    <strong>D.O.B : </strong>
                     {{ profile.birthday }}
                 </p>
         </div>
 
     </div>
-
+    <ng-template [ngIf] = "isViewingSelf()">
+        <button class = "editButton pa2 br2">Edit my profile</button>
+    </ng-template>
 </div>

@@ -1,3 +1,9 @@
 .card {
     background: #C5E3ED;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button {
+    background: #C5E3FF;
 }
