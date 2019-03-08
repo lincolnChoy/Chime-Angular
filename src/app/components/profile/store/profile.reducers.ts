@@ -15,6 +15,11 @@ export function profileReducer(state = initialState, action: ProfileActions.Prof
             return {
                 ...state
             }
+        case ProfileActions.LOAD_PROFILE:
+            return {
+                ...state,
+                profile: action.payload
+            }
         default:
             return state;
     }

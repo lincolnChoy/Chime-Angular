@@ -1,13 +1,22 @@
 import { Action } from '@ngrx/store';
 
 export const GET_PROFILE = 'GET_PROFILE';
+export const LOAD_PROFILE = 'LOAD_PROFILE';
 
-class GetProfile implements Action{
+export class GetProfile implements Action{
 
     readonly type = GET_PROFILE;
 
-    constructor(public payload : { id: number, password: string}) {}
+    constructor(public payload : number) {}
 }
 
 
-export type ProfileActions = GetProfile;
+export class LoadProfile implements Action{
+
+    readonly type = LOAD_PROFILE;
+
+    constructor(public payload : any) {}
+}
+
+
+export type ProfileActions = GetProfile | LoadProfile;

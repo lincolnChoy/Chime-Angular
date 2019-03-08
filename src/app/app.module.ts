@@ -21,13 +21,20 @@ import { CustomSpinnerComponent } from './components/shared/customSpinner/custom
 import { HomeModule } from './components/home/home.module';
 import { MaterialThemeModule } from './materialtheme.module';
 import { RegistrationComponent } from './components/register/register.component';
-import { ProfileModule } from './components/profile/profile.module';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileEffects } from './components/profile/store/profile.effects';
+import { ViewProfileComponent } from './components/profile/view/view-profile.component';
+import { EditProfileComponent } from './components/profile/edit/edit-profile.component';
+
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
 		RegistrationComponent,
+		ProfileComponent,
+		ViewProfileComponent,
+		EditProfileComponent,
 		CustomSpinnerComponent
 	],
 	imports: [
@@ -39,9 +46,8 @@ import { ProfileModule } from './components/profile/profile.module';
 		MaterialThemeModule,
 		BrowserAnimationsModule,
 		HomeModule,
-		ProfileModule,
 		StoreModule.forRoot(reducers),
-		EffectsModule.forRoot([ UserEffects, AuthEffects ]),
+		EffectsModule.forRoot([ UserEffects, ProfileEffects, AuthEffects ]),
 	],
 	providers: [ AuthGuard ],
 	bootstrap: [ AppComponent ]

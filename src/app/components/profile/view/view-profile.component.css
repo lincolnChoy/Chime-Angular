@@ -1,0 +1,22 @@
+.fieldContainers {
+    background: transparent;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.header {
+	background: white;
+	display: flex;
+	justify-content: space-between;
+}
+
+.body {
+	background: transparent;
+	border: 2px solid white;
+
+}
