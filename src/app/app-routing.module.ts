@@ -6,15 +6,13 @@ import { HomeComponent } from './components/home/home.component';
 import { RegistrationComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ViewProfileComponent } from './components/profile/view/view-profile.component';
-import { EditProfileComponent } from './components/profile/edit/edit-profile.component';
 
 const routes: Routes = [
 	{ path: '', component: LoginComponent },
 	{ path: 'register', component: RegistrationComponent },
 	{ path: 'home', component: HomeComponent, canActivate: [ AuthGuard ]},
 	{ path: 'profile', component: ProfileComponent, canActivate: [ AuthGuard ], children: [
-		{ path: ':id', component: ViewProfileComponent},
-		{ path: 'edit', component: EditProfileComponent }
+		{ path: ':id', component: ViewProfileComponent}
 	]},
 	{ path: '**', redirectTo: ''}
 ];

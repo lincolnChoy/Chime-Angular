@@ -1,6 +1,7 @@
 <ng-template [ngIf] = "!selected">
     <div class = "pa2 ma2 card pointer" (click) = "onClick()">
         <p>{{ getFullName() }}</p>
+        <img [src] = "user.picture" height = "50px"/>
     </div>
 </ng-template>
 

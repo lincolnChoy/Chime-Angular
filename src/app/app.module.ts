@@ -24,7 +24,6 @@ import { RegistrationComponent } from './components/register/register.component'
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileEffects } from './components/profile/store/profile.effects';
 import { ViewProfileComponent } from './components/profile/view/view-profile.component';
-import { EditProfileComponent } from './components/profile/edit/edit-profile.component';
 
 
 @NgModule({
@@ -34,7 +33,6 @@ import { EditProfileComponent } from './components/profile/edit/edit-profile.com
 		RegistrationComponent,
 		ProfileComponent,
 		ViewProfileComponent,
-		EditProfileComponent,
 		CustomSpinnerComponent
 	],
 	imports: [

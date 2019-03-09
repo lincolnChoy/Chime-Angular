@@ -23,6 +23,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 	private profile: any = null;
 	private loggedUserID : number = -1;
 	private profileID : number = -2;
+	private editMode : boolean = false;
 
 	constructor(private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute) {}
 
@@ -58,6 +59,10 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
 	isViewingSelf() {
 		return (this.loggedUserID == this.profileID);
+	}
+
+	onEditProfile(){
+		this.editMode = !this.editMode;
 	}
 
 	getFullName() {

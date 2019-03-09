@@ -1,39 +1,82 @@
-<div class = "container ma3 pa3">
-    <div class = "header pa5 w-60">
-        <div>
-            <h1 class = "tc">{{ getFullName() }}</h1>
+<ng-template [ngIf] = "!editMode">
+    <div class = "container ma3 pa3">
+        <div class = "header pa5 w-60">
+            <div>
+                <h1 class = "tc">{{ getFullName() }}</h1>
+            </div>
+            <div>
+                <img [src] = "profile.picture" width="300px" height = "300px"/>
+            </div>
+            
         </div>
-        <div>
-            <img [src] = "profile.picture" width="300px" height = "300px"/>
-        </div>
-        
-    </div>
-
-    <div class = "mt3 body w-60">
-        <div class = 'pa3'>
-            <p>
-                    <strong>About me : </strong>
-                    {{ profile.blurb }}
-                </p>
-        
+    
+        <div class = "mt3 body w-60">
+            <div class = 'pa3'>
                 <p>
-                    <strong>Occupation : </strong>
-                        {{ profile.occupation }}
+                        <strong>About me : </strong>
+                        {{ profile.blurb }}
                     </p>
-                <p>
-        
-                <p>
-                    <strong>Location : </strong>
-                        {{ profile.location }}
+            
+                    <p>
+                        <strong>Occupation : </strong>
+                            {{ profile.occupation }}
+                        </p>
+                    <p>
+            
+                    <p>
+                        <strong>Location : </strong>
+                            {{ profile.location }}
+                        </p>
+                    <p>
+                        <strong>D.O.B : </strong>
+                        {{ profile.birthday }}
                     </p>
-                <p>
-                    <strong>D.O.B : </strong>
-                    {{ profile.birthday }}
-                </p>
+            </div>
+    
         </div>
-
+        <ng-template [ngIf] = "isViewingSelf()">
+            <button class = "editButton pa2 br2 pointer" (click) = "onEditProfile()">Edit my profile</button>
+        </ng-template>
     </div>
-    <ng-template [ngIf] = "isViewingSelf()">
-        <button class = "editButton pa2 br2">Edit my profile</button>
-    </ng-template>
-</div>
+</ng-template>
+
+
+<ng-template [ngIf] = "editMode">
+    <div class = "container ma3 pa3">
+        <div class = "header pa5 w-60">
+            <div>
+                <h1 class = "tc">{{ getFullName() }}</h1>
+            </div>
+            <div>
+                <img [src] = "profile.picture" width="300px" height = "300px"/>
+            </div>
+            
+        </div>
+    
+        <div class = "mt3 body w-60">
+            <div class = 'pa3'>
+                <p>
+                        <strong>About me : </strong>
+                        {{ profile.blurb }}
+                    </p>
+            
+                    <p>
+                        <strong>Occupation : </strong>
+                            {{ profile.occupation }}
+                        </p>
+                    <p>
+            
+                    <p>
+                        <strong>Location : </strong>
+                            {{ profile.location }}
+                        </p>
+                    <p>
+                        <strong>D.O.B : </strong>
+                        {{ profile.birthday }}
+                    </p>
+            </div>
+    
+        </div>
+    </div>
+    
+</ng-template>
