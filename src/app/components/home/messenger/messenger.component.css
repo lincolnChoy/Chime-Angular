@@ -1,4 +1,39 @@
 .box {
     border: 1px solid white;
-    
+    width: 100%;
+    flex: 1
 }
+
+.messageSection {
+
+	height: 500px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.msgCard {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	max-width: 500px;
+	word-wrap: break-word;
+	border-radius: 1rem;
+	padding-top : 0.5em;
+	padding-bottom : 0.5em;
+}
+
+.sender {
+	background: #7ec0ee;
+	color : white;
+
+}
+
+.name {
+	background: #DEDEDE;
+}
+
+.receiver {
+	background: #DEDEDE;
+}
+
+

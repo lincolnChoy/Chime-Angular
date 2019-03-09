@@ -1,3 +1,26 @@
 <div class = 'box'>
-    <p>messenger works!</p>
+    <div class = "name tc">{{ getName() }}</div>
+    <div class = "messageSection">
+        <div *ngFor = "let messageObject of messages">
+
+            <ng-template [ngIf] = "isSending(messageObject)">
+                <div style = "display: flex; justify-content: flex-end;">
+                    <div  class = 'msgCard sender ph3 ma2'>
+                        {{ messageObject.message }}
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template [ngIf] = "!isSending(messageObject)">
+                <div style = "display: flex; justify-content: flex-start;">
+                    <div class = 'msgCard receiver ph3 ma2'>
+                        {{ messageObject.message }}
+                    </div>
+                </div>
+
+            </ng-template>
+
+        </div>
+    </div>
 </div>
+<input type = "text" />

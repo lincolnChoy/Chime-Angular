@@ -18,11 +18,17 @@ import * as ProfileActions from '../store/profile.actions';
 })
 export class ViewProfileComponent implements OnInit, OnDestroy {
 
+	/* Subscription to keep track of store */
 	private subscription: Subscription;
 
+	/* Variable to store profile */
 	private profile: any = null;
+
+	/* Separate variables to determine if this page can be edited */
 	private loggedUserID : number = -1;
 	private profileID : number = -2;
+
+	/* Edit boolean to toggle page state */
 	private editMode : boolean = false;
 
 	constructor(private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute) {}

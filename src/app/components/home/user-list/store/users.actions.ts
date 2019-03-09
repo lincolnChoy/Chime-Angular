@@ -3,7 +3,7 @@ import { User } from '../user.model';
 
 export const GET_USERS = 'GET_USERS';
 export const SET_USERS = 'SET_USERS';
-
+export const SET_TARGET  ='SET_TARGET';
 
 export class GetUsers implements Action {
 
@@ -18,4 +18,11 @@ export class SetUsers implements Action {
     constructor(public payload: any) {}
 }
 
-export type UserActions = GetUsers | SetUsers;
+export class SetTarget implements Action {
+
+    readonly type = SET_TARGET;
+
+    constructor(public payload: any) { }
+}
+
+export type UserActions = GetUsers | SetUsers | SetTarget;

@@ -18,12 +18,17 @@ import { AuthEffects } from './components/auth/store/auth.effects';
 
 import { CustomSpinnerComponent } from './components/shared/customSpinner/customSpinner.component';
 
-import { HomeModule } from './components/home/home.module';
 import { MaterialThemeModule } from './materialtheme.module';
 import { RegistrationComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileEffects } from './components/profile/store/profile.effects';
 import { ViewProfileComponent } from './components/profile/view/view-profile.component';
+import { MessengerEffects } from './components/home/messenger/store/messenger.effects';
+import { NavbarComponent } from './components/home/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { UserListComponent } from './components/home/user-list/user-list.component';
+import { UserCardComponent } from './components/home/user-list/user-card/user-card.component';
+import { MessengerComponent } from './components/home/messenger/messenger.component';
 
 
 @NgModule({
@@ -31,8 +36,17 @@ import { ViewProfileComponent } from './components/profile/view/view-profile.com
 		AppComponent,
 		LoginComponent,
 		RegistrationComponent,
+
+		NavbarComponent,
+		HomeComponent,
+
 		ProfileComponent,
 		ViewProfileComponent,
+
+		UserListComponent,
+		UserCardComponent,
+		MessengerComponent,
+		
 		CustomSpinnerComponent
 	],
 	imports: [
@@ -43,9 +57,8 @@ import { ViewProfileComponent } from './components/profile/view/view-profile.com
 		HttpClientModule,
 		MaterialThemeModule,
 		BrowserAnimationsModule,
-		HomeModule,
 		StoreModule.forRoot(reducers),
-		EffectsModule.forRoot([ UserEffects, ProfileEffects, AuthEffects ]),
+		EffectsModule.forRoot([ UserEffects, ProfileEffects, AuthEffects, MessengerEffects ]),
 	],
 	providers: [ AuthGuard ],
 	bootstrap: [ AppComponent ]
