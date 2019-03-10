@@ -5,12 +5,13 @@ export const SET_TARGET = 'SET_TARGET';
 export const GET_MESSAGES = 'GET_MESSAGES';
 export const LOAD_MESSAGES = 'LOAD_MESSAGES';
 export const CLEAR_MESSAGES = 'CLEAR_MESSAGES';
+export const SET_RESPONSE = 'SET_RESPONSE';
 
 export class SendMessage implements Action {
 
     readonly type = SEND_MESSAGE;
 
-    constructor() { }
+    constructor(public payload: { sender: number, destination: number, pw: string, isGroup: boolean, message: string }) { }
 
 }
 
@@ -44,4 +45,10 @@ export class LoadMessages implements Action {
     constructor(public payload: any[]) { }
 }
 
-export type MessengerActions = SendMessage | SetTarget | GetMessages | LoadMessages | ClearMessages;
+export class SetResponse implements Action {
+
+    readonly type = SET_RESPONSE;
+
+    constructor(public payload: {}) {}
+}
+export type MessengerActions = SendMessage | SetTarget | GetMessages | LoadMessages | ClearMessages | SetResponse;

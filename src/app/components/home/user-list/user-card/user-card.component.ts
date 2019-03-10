@@ -15,7 +15,6 @@ import * as UserActions from '../store/users.actions';
 export class UserCardComponent implements OnInit {
 
 	@Input() user: User;
-	private selected : boolean = false;
 	
 	constructor(private store: Store<fromApp.AppState>,private router: Router) {}
 
@@ -24,17 +23,13 @@ export class UserCardComponent implements OnInit {
 	}
 
 	onClick() {
-		console.log(this.user);
+
 		this.store.dispatch(new MessengerActions.ClearMessages());
 		this.store.dispatch(new MessengerActions.SetTarget(this.user));
 		this.store.dispatch(new UserActions.SetTarget(this.user));
 
-		this.selected = !this.selected
 	}
 
-	onViewProfile() {
-		this.router.navigate([`/profile/${this.user.id}`]);
-	}
 	
 	getFullName() {
 		return `${this.user.first} ${this.user.last}`;

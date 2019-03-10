@@ -36,4 +36,8 @@
 	background: #DEDEDE;
 }
 
+.image-upload > input {
+    display: none;
+}
+
 

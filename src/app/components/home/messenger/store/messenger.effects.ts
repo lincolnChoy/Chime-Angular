@@ -28,6 +28,27 @@ export class MessengerEffects {
                                 }
                             ];
                         }
+                    }));
+
+    @Effect()
+    sendMessage = this.actions$
+                .ofType(MessengerActions.SEND_MESSAGE)
+                .pipe(map((action: MessengerActions.SendMessage) => {
+                        return action.payload;
+                    })
+                    ,switchMap((sendData: { sender: number, destination: number, pw: string, isGroup: boolean, message: string }) => {
+                        return this.httpClient.post(`${ADDRESS}/sendMessage`, { ...sendData });
+                    })
+                    ,mergeMap((response) => {
+                        if (response['code'] === 0) {
+                            console.log(response);
+                            return [
+                                {
+                                    type: MessengerActions.SET_RESPONSE,
+                                    action: response['code']
+                                }
+                            ];
+                        }
 
                         // else {
                         //     return [

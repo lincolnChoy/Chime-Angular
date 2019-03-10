@@ -1,14 +1,4 @@
-<ng-template [ngIf] = "!selected">
-    <div class = "pa2 ma2 card pointer" (click) = "onClick()">
-        <p>{{ getFullName() }}</p>
-        <img [src] = "user.picture" height = "50px"/>
-    </div>
-</ng-template>
-
-<ng-template [ngIf] = "selected">
-    <div class = "pa2 ma2 card pointer" (click) = "onClick()">
-        
-        <p class = "button" (click) = "onViewProfile()">View profile</p>
-    </div>
-
-</ng-template>
+<div class = "pa2 ma2 card pointer" (click) = "onClick()">
+    <p>{{ getFullName() }}</p>
+    <img [src] = "user.picture" height = "50px"/>
+</div>

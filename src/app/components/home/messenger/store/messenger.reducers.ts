@@ -4,21 +4,21 @@ export interface State {
     messageTarget: any,
     isGroup: boolean
     messages: any[]
+    response: any
 }
 
 const initialState : State = {
 
     messageTarget: null,
     isGroup: false,
-    messages: []
+    messages: [],
+    response: null
 }
 
 export function messengerReducer(state = initialState, action: MessengerActions.MessengerActions) {
 
     switch (action.type) { 
 
-        case MessengerActions.SEND_MESSAGE:
-            return state;
         case MessengerActions.SET_TARGET:
             return {
                 ...state,
@@ -33,6 +33,11 @@ export function messengerReducer(state = initialState, action: MessengerActions.
             return {
                 ...state,
                 messages: []
+            }
+        case MessengerActions.SET_RESPONSE:
+            return {
+                ...state,
+                response: action.payload
             }
         default:
             return state;
