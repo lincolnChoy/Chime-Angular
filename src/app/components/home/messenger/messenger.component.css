@@ -40,4 +40,13 @@
     display: none;
 }
 
+.sendButton {
+	border: 1px solid white;
+	background: transparent;
+	cursor: pointer;
+}
 
+
+.sendButton:hover {
+	background: rgb(118, 200, 228);
+}

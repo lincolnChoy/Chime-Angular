@@ -5,21 +5,16 @@
 }
 
 .formButton {
-	border-radius : 80px;
 	cursor : pointer;
 	background : transparent;
-	border-style : solid;
-	border-width : 1px;
-	border-color : white;
-	-webkit-appearance: none;
-	-moz-appearance: none;
+	border : 1px solid white;
 	display : inline-block;
 	font-size : 1rem;
 
 }
 
 .formButton:hover {
-	background : #ADD8E6;
+	background: rgb(118, 200, 228);
 }
 
 .formInput {
@@ -55,7 +50,6 @@
 
 .formLabel {
 	display : block;
-	/*font-weight: 600;*/
 	font-size : 1.25rem;
 }
 
@@ -64,6 +58,5 @@
 }
 
 .errorMessage {
-	border: 2px solid white;
 	border-radius: 10px;
 }

@@ -16,7 +16,6 @@
                     <div style = "display: flex; justify-content: flex-start;">
                         <div class = 'msgCard receiver ph3 ma2'>
                             {{ messageObject.message }}
-    
                         </div>
                     </div>
                 </ng-template>
@@ -25,23 +24,23 @@
         </div>
         
     </div>
-    <div class = 'message w-100' style = "display : flex;justify-content : center">
+    <div class = 'message w-100 mt1' style = "display : flex;justify-content : center">
         <form [formGroup] = "messageForm" class = 'w-100'>
             <input 
-                class = 'b pa2 input-reset ba bg-transparent w-100' 
+                class = 'pa2 ba bg-transparent w-100' 
                 formControlName = "message"
                 (keydown) = "onPress($event)"
                 type = 'text' />
         </form>
     
-        <div class = 'image-upload grow'>
+        <div class = 'image-upload'>
             <label htmlFor = 'file-input'>
                 <img class = 'pointer grow' src = "assets/attach.png" alt = 'paperclip' width = '40px'/>
             </label>
             <input id = 'file-input' type = 'file'/>
         </div>
         
-        <button class = 'ml2 b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f5 dib br3' (click) = "sendMessage()">Send</button>
+        <button class = 'mh1 ph3 pv2 br3 sendButton' (click) = "sendMessage()">Send</button>
         
     </div>
 </ng-template>

@@ -13,7 +13,7 @@ import { errorHandler } from '../shared/errorHandler/errorHandler';
 @Component({
 	selector: 'app-register',
 	templateUrl: './register.component.html',
-	styleUrls: ['./register.component.css']
+	styleUrls: ['../login/login.component.css']
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
 

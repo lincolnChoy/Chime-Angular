@@ -2,6 +2,7 @@
     background: #C5E3ED;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .card:hover {
