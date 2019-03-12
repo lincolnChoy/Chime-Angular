@@ -1,4 +1,5 @@
-<div class = "list">
-    <h3 class ='tc'>CONTACTS</h3>
+<div>
+    <h3 class = "tc">CONTACTS</h3>
+    <hr />
     <app-user-card *ngFor = "let user of (usersState | async).userList;" [user] = "user"></app-user-card>
 </div>

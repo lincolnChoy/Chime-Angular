@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
@@ -30,6 +30,9 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
 	/* Edit boolean to toggle page state */
 	private editMode : boolean = false;
+
+	/* Edit profile form */
+	private editForm: FormGroup
 
 	constructor(private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute) {}
 
@@ -69,6 +72,12 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
 	onEditProfile(){
 		this.editMode = !this.editMode;
+		this.editForm = new FormGroup({
+			about: new FormControl(this.profile['blurb']),
+			occupation: new FormControl(this.profile['occupation']),
+			location: new FormControl(this.profile['location']),
+			birthday: new FormControl(this.profile['birthday']),
+		})
 	}
 
 	getFullName() {

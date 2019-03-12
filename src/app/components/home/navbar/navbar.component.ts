@@ -18,7 +18,7 @@ export class NavbarComponent {
 
 	constructor(private store: Store<fromApp.AppState>,private router: Router, private route: ActivatedRoute) {}
 
-    ngOnInit() {
+		ngOnInit() {
 		this.subscription = this.store.select('user').subscribe(
 			(userState: fromAuth.State) => {
 				if (userState.user) {
@@ -28,7 +28,7 @@ export class NavbarComponent {
 		)
 	}
 
-    onLogout() {
+	onLogout() {
 		this.store.dispatch(new AuthActions.LogOut());
 		this.router.navigate(['/']);
 	}

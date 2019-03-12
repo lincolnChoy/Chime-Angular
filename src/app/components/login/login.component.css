@@ -24,8 +24,6 @@
 	border-style : solid;
 	border-width : 1px;
 	border-color : white;
-	-webkit-appearance: none;
-	-moz-appearance: none;
 }
 
 .formInput:hover {

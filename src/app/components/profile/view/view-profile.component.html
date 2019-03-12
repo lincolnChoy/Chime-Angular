@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <ng-template [ngIf] = "!editMode">
     <div class = "container ma3 pa3">
         <div class = "header pa5 w-60">
@@ -5,7 +6,7 @@
                 <h1 class = "tc">{{ getFullName() }}</h1>
             </div>
             <div>
-                <img [src] = "profile.picture" width="300px" height = "300px"/>
+                <img [src] = "profile.picture" width="200px" height = "200px"/>
             </div>
             
         </div>
@@ -48,32 +49,27 @@
                 <h1 class = "tc">{{ getFullName() }}</h1>
             </div>
             <div>
-                <img [src] = "profile.picture" width="300px" height = "300px"/>
+                <img [src] = "profile.picture" width="200px" height = "200px"/>
             </div>
             
         </div>
     
         <div class = "mt3 body w-60">
             <div class = 'pa3'>
-                <p>
-                        <strong>About me : </strong>
-                        {{ profile.blurb }}
-                    </p>
-            
-                    <p>
-                        <strong>Occupation : </strong>
-                            {{ profile.occupation }}
-                        </p>
-                    <p>
-            
-                    <p>
-                        <strong>Location : </strong>
-                            {{ profile.location }}
-                        </p>
-                    <p>
-                        <strong>D.O.B : </strong>
-                        {{ profile.birthday }}
-                    </p>
+                <form [formGroup] = "editForm">
+                    <div style = "display: flex; flex-direction: column;">
+
+                        <input class = "mv2 formInput" placeholder = "About me" formControlName = "about"/>
+
+                        <input class = "mv2 formInput" placeholder = "Occupation" formControlName = "occupation"/>
+    
+                        <input class = "mv2 formInput" placeholder = "Location" formControlName = "location"/>
+    
+                        <input class = "mv2 formInput" placeholder = "D.O.B" formControlName = "birthday"/>
+                    </div>
+                    <button class ="editButton pa2 pointer">Save</button>
+                    <button class = "editButton pa2 pointer" (click) = "onEditProfile()">Cancel</button>
+                </form>
             </div>
     
         </div>
