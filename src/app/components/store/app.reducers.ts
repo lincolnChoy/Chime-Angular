@@ -8,13 +8,15 @@ export interface AppState {
     user: fromAuth.State,
     contactList: fromUsers.State,
     profile: fromProfile.State,
-    messenger: fromMessenger.State
+    messenger: fromMessenger.State,
+    target: fromMessenger.TargetState,
 }
 
 export const reducers: ActionReducerMap<AppState> = {
     user: fromAuth.authReducer,
     contactList: fromUsers.usersReducer,
     profile: fromProfile.profileReducer,
-    messenger: fromMessenger.messengerReducer
+    messenger: fromMessenger.messengerReducer,
+    target: fromMessenger.targetReducer
 }
 

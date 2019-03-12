@@ -4,6 +4,12 @@
     justify-content: space-between;
 }
 
+.card:hover {
+	background: rgb(118, 200, 228);
+}
+
+
 .button {
     background: #C5E3FF;
 }
+

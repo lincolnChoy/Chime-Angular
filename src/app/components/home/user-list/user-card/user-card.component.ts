@@ -26,8 +26,6 @@ export class UserCardComponent implements OnInit {
 
 		this.store.dispatch(new MessengerActions.ClearMessages());
 		this.store.dispatch(new MessengerActions.SetTarget(this.user));
-		this.store.dispatch(new UserActions.SetTarget(this.user));
-
 	}
 
 	

@@ -6,7 +6,6 @@ import { take } from 'rxjs/operators';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import * as fromApp from '../../store/app.reducers';
-import * as fromList from '../user-list/store/users.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
 
 import * as UserActions from '../user-list/store/users.actions';
@@ -60,18 +59,17 @@ export class MessengerComponent implements OnInit {
 		);
 
 		/* Listen to event - user clicking on a different person to message */
-		/* TODO: Fix possible bug where user list update can trigger this event */
-		this.subscription = this.store.select('contactList').subscribe(
-			(state: fromList.State) => {
+		this.subscription = this.store.select('target').subscribe(
+			(state: fromMessenger.TargetState) => {
 
 				/* Make sure target isn't empty */
-				if (state.target) {
+				if (state.messageTarget) {
 
 					/* Display message container */
 					this.userSet = true;
 					
 					/* Set target */
-					this.target = state.target;
+					this.target = state.messageTarget;
 
 					/* Fetch messages */
 					this.store.dispatch(new MessengerActions.GetMessages({ 
@@ -89,7 +87,11 @@ export class MessengerComponent implements OnInit {
 		this.subscription.add(this.store.select('messenger').subscribe(
 			(messagesState: fromMessenger.State) => {
 				this.messages = messagesState.messages;
-				this.scrollToBottom();
+				/* Not sure why the 0s timeout is necessary but it works */ 
+				setTimeout(() => {
+					this.scrollToBottom();
+				},0);
+				
 			}
 		));
 		
