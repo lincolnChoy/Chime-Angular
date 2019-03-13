@@ -20,7 +20,6 @@ export class MessengerEffects {
                     })
                     ,mergeMap((response) => {
                         if (response['code'] === 0) {
-                            console.log(response);
                             return [
                                 {
                                     type: MessengerActions.LOAD_MESSAGES,
@@ -41,22 +40,13 @@ export class MessengerEffects {
                     })
                     ,mergeMap((response) => {
                         if (response['code'] === 0) {
-                            console.log(response);
                             return [
                                 {
-                                    type: MessengerActions.SET_RESPONSE,
-                                    action: response['code']
+                                    type: MessengerActions.LOAD_MESSAGES,
+                                    payload: response['messages']
                                 }
                             ];
                         }
-                        // else {
-                        //     return [
-                        //         {
-                        //             type: AuthActions.SHOW_ERROR,
-                        //             payload: response['code']
-                        //         }
-                        //     ];
-                        // }
                     }));
 
     constructor(private actions$: Actions,private httpClient: HttpClient) {}

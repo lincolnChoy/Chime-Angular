@@ -130,19 +130,7 @@ export class MessengerComponent implements OnInit {
 			this.messageForm.patchValue({
 				message: null
 			});
-
-			/* Temporary fetch method */
-			setTimeout(() => {
-				this.store.dispatch(new MessengerActions.GetMessages({ 
-					sender: this.user.id,
-					destination: this.target.id,
-					isGroup: false,
-					pw: this.user.password
-				}));
-			}, 300);
-
 		}
-
 	}
 
 	onViewProfile() {

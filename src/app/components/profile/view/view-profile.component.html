@@ -1,78 +1,86 @@
 <app-navbar></app-navbar>
-<ng-template [ngIf] = "!editMode">
-    <div class = "container ma3 pa3">
-        <div class = "header pa5 w-60">
-            <div>
-                <h1 class = "tc">{{ getFullName() }}</h1>
+<ng-template [ngIf] = "profile.id !== null">
+    <ng-template [ngIf] = "!editMode">
+        <div class = "container ma3 pa3">
+            <div class = "header pa5 w-60">
+                <div>
+                    <h1 class = "tc">{{ getFullName() }}</h1>
+                </div>
+                <div>
+                    <img [src] = "profile.picture" width="200px" height = "200px"/>
+                </div>
+                
             </div>
-            <div>
-                <img [src] = "profile.picture" width="200px" height = "200px"/>
-            </div>
-            
-        </div>
-    
-        <div class = "mt3 body w-60">
-            <div class = 'pa3'>
-                <p>
-                        <strong>About me : </strong>
-                        {{ profile.blurb }}
-                    </p>
-            
+        
+            <div class = "mt3 body w-60">
+                <div class = 'pa3'>
                     <p>
-                        <strong>Occupation : </strong>
-                            {{ profile.occupation }}
+                            <strong>About me : </strong>
+                            {{ profile.blurb }}
                         </p>
-                    <p>
-            
-                    <p>
-                        <strong>Location : </strong>
-                            {{ profile.location }}
+                
+                        <p>
+                            <strong>Occupation : </strong>
+                                {{ profile.occupation }}
+                            </p>
+                        <p>
+                
+                        <p>
+                            <strong>Location : </strong>
+                                {{ profile.location }}
+                            </p>
+                        <p>
+                            <strong>D.O.B : </strong>
+                            {{ profile.birthday }}
                         </p>
-                    <p>
-                        <strong>D.O.B : </strong>
-                        {{ profile.birthday }}
-                    </p>
+                </div>
+        
             </div>
-    
+            <ng-template [ngIf] = "isViewingSelf()">
+                <button class = "editButton pa2 br2 pointer" (click) = "onEditProfile()">Edit my profile</button>
+            </ng-template>
         </div>
-        <ng-template [ngIf] = "isViewingSelf()">
-            <button class = "editButton pa2 br2 pointer" (click) = "onEditProfile()">Edit my profile</button>
-        </ng-template>
-    </div>
+    </ng-template>
+    
+    
+    <ng-template [ngIf] = "editMode">
+        <div class = "container ma3 pa3">
+            <div class = "header pa5 w-60">
+                <div>
+                    <h1 class = "tc">{{ getFullName() }}</h1>
+                </div>
+                <div>
+                    <img [src] = "profile.picture" width="200px" height = "200px"/>
+                </div>
+                
+            </div>
+        
+            <div class = "mt3 body w-60">
+                <div class = 'pa3'>
+                    <form [formGroup] = "editForm">
+                        <div style = "display: flex; flex-direction: column;">
+    
+                            <input class = "mv2 formInput" placeholder = "About me" formControlName = "about"/>
+    
+                            <input class = "mv2 formInput" placeholder = "Occupation" formControlName = "occupation"/>
+        
+                            <input class = "mv2 formInput" placeholder = "Location" formControlName = "location"/>
+        
+                            <input class = "mv2 formInput" placeholder = "D.O.B" formControlName = "birthday"/>
+                        </div>
+                        <button class ="editButton pa2 pointer">Save</button>
+                        <button class = "editButton pa2 pointer" (click) = "onEditProfile()">Cancel</button>
+                    </form>
+                </div>
+        
+            </div>
+        </div>
+        
+    </ng-template>
+    
 </ng-template>
 
 
-<ng-template [ngIf] = "editMode">
-    <div class = "container ma3 pa3">
-        <div class = "header pa5 w-60">
-            <div>
-                <h1 class = "tc">{{ getFullName() }}</h1>
-            </div>
-            <div>
-                <img [src] = "profile.picture" width="200px" height = "200px"/>
-            </div>
-            
-        </div>
-    
-        <div class = "mt3 body w-60">
-            <div class = 'pa3'>
-                <form [formGroup] = "editForm">
-                    <div style = "display: flex; flex-direction: column;">
-
-                        <input class = "mv2 formInput" placeholder = "About me" formControlName = "about"/>
-
-                        <input class = "mv2 formInput" placeholder = "Occupation" formControlName = "occupation"/>
-    
-                        <input class = "mv2 formInput" placeholder = "Location" formControlName = "location"/>
-    
-                        <input class = "mv2 formInput" placeholder = "D.O.B" formControlName = "birthday"/>
-                    </div>
-                    <button class ="editButton pa2 pointer">Save</button>
-                    <button class = "editButton pa2 pointer" (click) = "onEditProfile()">Cancel</button>
-                </form>
-            </div>
-    
-        </div>
-    </div>
-    
+<ng-template [ngIf] = "profile.id === null">
+    <h1>Loading...</h1>
 </ng-template>
