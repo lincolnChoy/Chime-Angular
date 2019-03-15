@@ -44,6 +44,9 @@ export class UserCardComponent {
 		else if (lastOn >= 60) {
 			return `${Math.floor(lastOn/60)}h`;
 		}
+		else if (lastOn <= 1) {
+			return '1m';
+		}
 		else {
 			return `${lastOn}m`;
 		}

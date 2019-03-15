@@ -41,3 +41,11 @@
 	border-width : 1px;
 	border-color : white;
 }
+
+.spinner-wrapper {
+	height: 60%; 
+	width: 100%; 
+	display: flex; 
+	justify-content: center; 
+	align-items: center;
+}
