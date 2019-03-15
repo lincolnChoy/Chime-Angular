@@ -11,7 +11,7 @@ export class SendMessage implements Action {
 
     readonly type = SEND_MESSAGE;
 
-    constructor(public payload: { sender: number, destination: number, pw: string, isGroup: boolean, message: string }) { }
+    constructor(public payload: { sender: number, destination: number, pw: string, isGroup: boolean, message: string, isFile: boolean }) { }
 
 }
 

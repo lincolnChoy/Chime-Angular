@@ -50,3 +50,30 @@
 .sendButton:hover {
 	background: rgb(118, 200, 228);
 }
+
+
+.chatHead {
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	border-radius : 100%;
+}
+
+.chatHead img {
+	height: 100%;
+	width : 100%;
+	object-fit: cover;
+}
+
+.receiverWrapper {
+	display: flex; 
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.senderWrapper {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+	align-items: center;
+}

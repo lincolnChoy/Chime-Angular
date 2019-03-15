@@ -43,7 +43,9 @@ export class MessengerComponent implements OnInit {
 	private messageForm: FormGroup;
 
 
-	constructor(private store: Store<fromApp.AppState>, private router: Router) { }
+	constructor(private store: Store<fromApp.AppState>, private router: Router) { 
+		this.uploadFile = this.uploadFile.bind(this);
+	}
 
 	ngOnInit() {
 		
@@ -87,6 +89,7 @@ export class MessengerComponent implements OnInit {
 		this.subscription.add(this.store.select('messenger').subscribe(
 			(messagesState: fromMessenger.State) => {
 				this.messages = messagesState.messages;
+				console.log(this.messages);
 				/* Not sure why the 0s timeout is necessary but it works */ 
 				setTimeout(() => {
 					this.scrollToBottom();
@@ -97,13 +100,51 @@ export class MessengerComponent implements OnInit {
 		
 	}
 
-	/* Helper function to determine placement of message card */
-	// TODO: Will not work with group messages
-	isSending(messageObject: any) {
+	uploadFile(event) {
 
-		return messageObject.sender === this.user.id;
+		/* Grab the file and read as a base64 string */
+		let file = event.target.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
 
+
+		/* When b64 string is ready, send it to the back-end */
+		reader.onload = () => {
+
+			var fileData = reader.result.toString();
+			this.store.dispatch(new MessengerActions.SendMessage({
+				sender: this.user.id,
+				destination: this.target.id,
+				pw: this.user.password,
+				message: fileData,
+				isFile: true,
+				// Hardcoded for now
+				isGroup: false,
+			}));
+		}
 	}
+
+	checkConsecutiveMessage(index, messages) {
+
+		if (index === 0) {
+			return false;
+		}
+		else {
+			return (messages[index].sender === messages[index - 1].sender);
+		}
+	}
+
+	getPicture(i, messages) {
+
+		if (!this.checkConsecutiveMessage(i, messages)) {
+			return (messages[i].sender === this.target.id ? this.target.picture : this.user.picture);
+		}
+		else {
+			return 'assets/transparent.png';
+		}
+	}
+
+
 
 	/* Key listener for message input field */
 	onPress(event) {
@@ -111,6 +152,8 @@ export class MessengerComponent implements OnInit {
 			this.sendMessage();
 		}
 	}
+
+
 	sendMessage() {
 		
 		const message = this.messageForm.controls.message.value;
@@ -122,6 +165,7 @@ export class MessengerComponent implements OnInit {
 				destination: this.target.id,
 				pw: this.user.password,
 				message: message,
+				isFile: false,
 				// Hardcoded for now
 				isGroup: false,
 			}));
@@ -133,10 +177,8 @@ export class MessengerComponent implements OnInit {
 		}
 	}
 
-	onViewProfile() {
-		this.router.navigate([`/profile/${this.target.id}`]);
-	}
 
+	/* Scrolls to bottom of message list */
 	scrollToBottom() {
 		if (this.target !== null) {
 			var elem = document.getElementById('bottom');
@@ -146,9 +188,27 @@ export class MessengerComponent implements OnInit {
 		}
 	}
 
+
+	/* Shows name of message target on top of message box */
 	getName() {
 		if (this.target !==null) {
 			return this.target.first;
 		}
 	}
+
+
+	/* Views profile after clicking name tag of message target */
+	onViewProfile() {
+		this.router.navigate([`/profile/${this.target.id}`]);
+	}
+
+
+	/* Helper function to determine placement of message card */
+	// TODO: Will not work with group messages
+	isSending(messageObject: any) {
+
+		return messageObject.sender === this.user.id;
+
+	}
+
 }

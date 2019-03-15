@@ -35,7 +35,7 @@ export class MessengerEffects {
                 .pipe(map((action: MessengerActions.SendMessage) => {
                         return action.payload;
                     })
-                    ,switchMap((sendData: { sender: number, destination: number, pw: string, isGroup: boolean, message: string }) => {
+                    ,switchMap((sendData: { sender: number, destination: number, pw: string, isGroup: boolean, message: string, isFile: boolean }) => {
                         return this.httpClient.post(`${ADDRESS}/sendMessage`, { ...sendData });
                     })
                     ,mergeMap((response) => {
