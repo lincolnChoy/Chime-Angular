@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ParticlesModule } from 'angular-particle';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -59,6 +60,7 @@ import { MessengerComponent } from './components/home/messenger/messenger.compon
 		BrowserAnimationsModule,
 		StoreModule.forRoot(reducers, { metaReducers: [ clearState ]}),
 		EffectsModule.forRoot([ UserEffects, ProfileEffects, AuthEffects, MessengerEffects ]),
+		ParticlesModule
 	],
 	providers: [ AuthGuard ],
 	bootstrap: [ AppComponent ]

@@ -10,7 +10,7 @@
                 }">
 
                     <div class = "chatHead ma2">
-                        <img [src] = "getPicture(i, messages)" alt = "" />
+                        <img [src] = "getPicture(i, messages)" alt = ""/>
                     </div>
 
                     <!-- Image message -->
@@ -31,7 +31,7 @@
 
                     <!-- Only display if first new message -->
                     <ng-template [ngIf] = "messageObject.filecode === 10">
-                        <div class = 'msgCard receiver ph3 ma2' 
+                        <div class = 'msgCard receiver ph3 pv3 ma2' 
                             [ngClass] = "{ 
                                         'receiver': !isSending(messageObject),
                                         'sender': isSending(messageObject)

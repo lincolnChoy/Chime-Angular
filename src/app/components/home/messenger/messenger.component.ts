@@ -145,7 +145,6 @@ export class MessengerComponent implements OnInit {
 	}
 
 
-
 	/* Key listener for message input field */
 	onPress(event) {
 		if (event.key === 'Enter') {

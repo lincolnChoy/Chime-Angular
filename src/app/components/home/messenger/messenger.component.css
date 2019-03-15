@@ -6,7 +6,7 @@
 
 .messageSection {
 
-	height: 500px;
+	height: 70vh;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
@@ -65,7 +65,7 @@
 
 .chatHead img {
 	height: 100%;
-	width : 100%;
+	width: 100%;
 	object-fit: cover;
 }
 
