@@ -22,16 +22,32 @@ export class UserCardComponent {
 		this.store.dispatch(new MessengerActions.SetTarget(this.user));
 	}
 
-	getOnlineStatus() {
-
+	wasRecentlyOnline() {
 		const timeNow = (new Date()).getTime();
-		if (timeNow - (+this.user.lastSeen) <= 120000) {
-			return 'assets/dot.png';
+		return (timeNow - (+this.user.lastSeen) <= 30*1000);
+	}
+
+	getLastOnline() {
+		const timeNow = (new Date()).getTime();
+
+		let lastOn = Math.floor((timeNow - (+this.user.lastSeen))/(60*1000));
+
+		/* More than 3 days ago */
+		if (lastOn >= 4320) {
+			return '>3d';
+		}
+		/* More than 1 day ago */
+		else if (lastOn >= 1440) {
+			return `${Math.floor(lastOn/(60*24))}d`;
+		}
+		/* More than one hour */
+		else if (lastOn >= 60) {
+			return `${Math.floor(lastOn/60)}h`;
 		}
 		else {
-			return '';
-		}	
-
+			return `${lastOn}m`;
+		}
+		
 	}
 	
 	getFullName() {
