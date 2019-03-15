@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './components/auth/auth-guard.service';
-import { reducers } from './components/store/app.reducers';
+import { reducers, clearState } from './components/store/app.reducers';
 import { UserEffects } from './components/home/user-list/store/users.effects';
 import { AuthEffects } from './components/auth/store/auth.effects';
 
@@ -57,7 +57,7 @@ import { MessengerComponent } from './components/home/messenger/messenger.compon
 		HttpClientModule,
 		MaterialThemeModule,
 		BrowserAnimationsModule,
-		StoreModule.forRoot(reducers),
+		StoreModule.forRoot(reducers, { metaReducers: [ clearState ]}),
 		EffectsModule.forRoot([ UserEffects, ProfileEffects, AuthEffects, MessengerEffects ]),
 	],
 	providers: [ AuthGuard ],

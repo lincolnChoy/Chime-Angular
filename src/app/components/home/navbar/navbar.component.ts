@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ApplicationInitStatus } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
 import * as AuthActions from '../../auth/store/auth.actions';
+import * as AppActions from '../../store/app.actions';
+
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -29,7 +31,7 @@ export class NavbarComponent {
 	}
 
 	onLogout() {
-		this.store.dispatch(new AuthActions.LogOut());
+		this.store.dispatch(new AppActions.Logout());
 		this.router.navigate(['/']);
 	}
 	
