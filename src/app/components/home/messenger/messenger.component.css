@@ -29,7 +29,11 @@
 }
 
 .name {
-	background: rgb(118, 200, 228);
+	background-color : rgba(255,255,255,0.2);
+}
+
+.name:hover {
+	background-color: rgba(118, 200, 228, 0.5);
 }
 
 .receiver {

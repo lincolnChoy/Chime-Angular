@@ -58,6 +58,11 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 				}
 			}
 		));
+
+		this.subscription.add(this.route.params.subscribe(params => {
+			this.profileID = this.route.snapshot.params['id'];
+			this.store.dispatch(new ProfileActions.GetProfile(this.profileID));
+		}));
 	
 	}
 

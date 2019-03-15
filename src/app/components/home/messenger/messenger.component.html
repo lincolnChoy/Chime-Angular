@@ -1,6 +1,6 @@
 <ng-template [ngIf] = "userSet">
     <div class = 'box'>
-        <div class = "name tc pa2 pointer" (click) = "onViewProfile()">{{ getName() }}</div>
+        <div class = "name tc pa3 pointer" (click) = "onViewProfile()">{{ getName() }}</div>
         <div class = "messageSection" id = "bottom">
             <div *ngFor = "let messageObject of messages; let i = index;">
                 
