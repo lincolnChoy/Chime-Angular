@@ -71,8 +71,13 @@
                         <button class = "editButton pa2 mh2 pointer" (click) = "onUpdateProfile()">Save</button>
                         <button class = "editButton pa2 mh2 pointer" (click) = "onEditProfile()">Cancel</button>
                     </form>
+                    <ng-template [ngIf] = "updateResponse === 0 && !waiting">
+                        <p class = 'tc'>Profile successfully updated!</p>
+                    </ng-template>
+                    <ng-template [ngIf] = "waiting">
+                        <app-spinner></app-spinner>
+                    </ng-template>
                 </div>
-        
             </div>
         </div>
         

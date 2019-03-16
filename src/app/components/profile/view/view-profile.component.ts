@@ -34,6 +34,11 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 	/* Edit profile form */
 	private editForm: FormGroup
 
+	/* Shows loading spinner */
+	private waiting: boolean;
+
+	private updateResponse: number = -1;
+
 	constructor(private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute) {}
 
 
@@ -51,14 +56,23 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 			}
 		)
 
+		/* Listens to these events 
+		- profile loaded
+		- profile update response
+		*/
 		this.subscription.add(this.store.select('profile').subscribe(
 			(profileState: fromProfile.State) => {
 				if (profileState.profile) {
 					this.profile = profileState.profile;
 				}
+				if (profileState.response === 0 || profileState.response !== null) {
+					this.waiting = false;
+					this.updateResponse = profileState.response;
+				}
 			}
 		));
 
+		/* Listens to route changes and updates profile accordingly */
 		this.subscription.add(this.route.params.subscribe(params => {
 			this.profileID = this.route.snapshot.params['id'];
 			this.store.dispatch(new ProfileActions.GetProfile(this.profileID));
@@ -77,7 +91,8 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 		return (this.loggedUserID == this.profileID);
 	}
 
-	onEditProfile(){
+	onEditProfile() {
+
 		this.editMode = !this.editMode;
 		this.editForm = new FormGroup({
 			about: new FormControl(this.profile['blurb']),
@@ -89,9 +104,14 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
 	onUpdateProfile() {
 
+		/* Grab user credentials from store and call API to update profile */
 		this.store.select('user').pipe(take(1)).subscribe(
 			(userState: fromAuth.State) => {
 				if (userState.user) {
+
+					/* Display loading spinner */
+					this.waiting = true;
+
 					const blurb = this.editForm.controls.about.value;
 					const occupation = this.editForm.controls.occupation.value;
 					const location = this.editForm.controls.location.value;
