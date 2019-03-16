@@ -49,10 +49,14 @@
                 <div>
                     <h1 class = "tc">{{ getFullName() }}</h1>
                 </div>
-                <div>
+                <div style = "display: flex; flex-direction: column; justify-content: space-between;">
                     <img [src] = "profile.picture" width="200px" height = "200px"/>
-                </div>
-                
+                    <div>
+                        <p>Update your profile picture</p>
+                        <input type = 'file'
+                            (change)=  "uploadFile($event)"/>
+                    </div>
+                </div> 
             </div>
         
             <div class = "mt3 body w-60">
@@ -67,6 +71,7 @@
                             <input class = "mv2 formInput" placeholder = "Location" formControlName = "location"/>
         
                             <input class = "mv2 formInput" placeholder = "D.O.B" formControlName = "birthday"/>
+
                         </div>
                         <button class = "editButton pa2 mh2 pointer" (click) = "onUpdateProfile()">Save</button>
                         <button class = "editButton pa2 mh2 pointer" (click) = "onEditProfile()">Cancel</button>

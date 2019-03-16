@@ -33,13 +33,16 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
 	/* Edit profile form */
 	private editForm: FormGroup
+	private picture: string = null;
 
 	/* Shows loading spinner */
 	private waiting: boolean;
 
 	private updateResponse: number = -1;
 
-	constructor(private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute) {}
+	constructor(private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute) {
+		this.uploadFile = this.uploadFile.bind(this);
+	}
 
 
 	ngOnInit() {
@@ -68,6 +71,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 				if (profileState.response === 0 || profileState.response !== null) {
 					this.waiting = false;
 					this.updateResponse = profileState.response;
+					
 				}
 			}
 		));
@@ -102,6 +106,20 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 		})
 	}
 
+	
+	uploadFile(event) {
+		let file = event.target.files[0];
+
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+
+		reader.onload = () => {
+
+			var fileData = reader.result.toString();
+			this.picture = fileData;
+		}
+}
+
 	onUpdateProfile() {
 
 		/* Grab user credentials from store and call API to update profile */
@@ -116,7 +134,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 					const occupation = this.editForm.controls.occupation.value;
 					const location = this.editForm.controls.location.value;
 					const birthday = this.editForm.controls.birthday.value;
-					const picture = null;
+					const picture = this.picture;
 
 					this.store.dispatch(new ProfileActions.SaveProfile({
 						id: userState.user['id'],
@@ -126,7 +144,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 						location: location,
 						birthday: birthday,
 						picture: picture
-					}))
+					}));
 				}
 			}
 		);

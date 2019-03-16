@@ -22,7 +22,8 @@ export class ProfileEffects {
 				if (response['code'] === 0) {
                     const user = {
                         ...response
-                    }
+					}
+					console.log('here');
 					return [
 						{
 							type: ProfileActions.LOAD_PROFILE,
