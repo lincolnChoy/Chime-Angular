@@ -3,7 +3,6 @@ import { Actions, Effect } from '@ngrx/effects';
 import { map, switchMap, mergeMap } from 'rxjs/operators';;
 import { HttpClient } from '@angular/common/http';
 import { ADDRESS } from '../../../../constants';
-import { Router } from '@angular/router';
 
 import * as ProfileActions from './profile.actions';
 
@@ -32,7 +31,27 @@ export class ProfileEffects {
 					];
 				}
 			}));
-	
 
-	constructor(private actions$: Actions, private router: Router,private httpClient: HttpClient) {}
+	@Effect()
+	saveProfile = this.actions$
+		.ofType(ProfileActions.SAVE_PROFILE)
+		.pipe(map((action: ProfileActions.SaveProfile) => {
+				return action.payload;
+			})
+			,switchMap((data: { id: string, pw: string, picture: string, birthday: string, location: string, occupation: string, blurb: string}) => {
+				return this.httpClient.post(`${ADDRESS}/saveProfile`, {...data });
+			})
+			,mergeMap((response) => {
+				if (response['code'] === 0) {
+					return [
+						{
+							type: ProfileActions.SET_RESPONSE,
+							payload: response['code']
+						}
+					];
+				}
+			}));
+
+
+	constructor(private actions$: Actions, private httpClient: HttpClient) {}
 }

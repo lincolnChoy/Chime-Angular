@@ -37,7 +37,7 @@
         
             </div>
             <ng-template [ngIf] = "isViewingSelf()">
-                <button class = "editButton pa2 br2 pointer" (click) = "onEditProfile()">Edit my profile</button>
+                <p class = "editButton pa2 pointer" (click) = "onEditProfile()">Edit</p>
             </ng-template>
         </div>
     </ng-template>
@@ -58,7 +58,7 @@
             <div class = "mt3 body w-60">
                 <div class = 'pa3'>
                     <form [formGroup] = "editForm">
-                        <div style = "display: flex; flex-direction: column;">
+                        <div class = 'mv2' style = "display: flex; flex-direction: column;">
     
                             <input class = "mv2 formInput" placeholder = "About me" formControlName = "about"/>
     
@@ -68,8 +68,8 @@
         
                             <input class = "mv2 formInput" placeholder = "D.O.B" formControlName = "birthday"/>
                         </div>
-                        <button class = "editButton pa2 pointer">Save</button>
-                        <button class = "editButton pa2 pointer" (click) = "onEditProfile()">Cancel</button>
+                        <button class = "editButton pa2 mh2 pointer" (click) = "onUpdateProfile()">Save</button>
+                        <button class = "editButton pa2 mh2 pointer" (click) = "onEditProfile()">Cancel</button>
                     </form>
                 </div>
         

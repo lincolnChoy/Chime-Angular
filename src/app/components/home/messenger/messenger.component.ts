@@ -89,7 +89,6 @@ export class MessengerComponent implements OnInit {
 		this.subscription.add(this.store.select('messenger').subscribe(
 			(messagesState: fromMessenger.State) => {
 				this.messages = messagesState.messages;
-				console.log(this.messages);
 				/* Not sure why the 0s timeout is necessary but it works */ 
 				setTimeout(() => {
 					this.scrollToBottom();

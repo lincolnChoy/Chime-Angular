@@ -8,7 +8,8 @@ export interface State {
         occupation: string,
         blurb: string,
         picture: string
-    }
+    },
+    response: number
 }
 
 const initialState: State = {
@@ -19,7 +20,8 @@ const initialState: State = {
         occupation: null,
         blurb: null,
         picture: null
-    }
+    },
+    response: null
 }
 
 export function profileReducer(state = initialState, action: ProfileActions.ProfileActions) {
@@ -36,6 +38,11 @@ export function profileReducer(state = initialState, action: ProfileActions.Prof
             }
         case ProfileActions.CLEAR_PROFILE:
             return initialState;
+        case ProfileActions.SET_RESPONSE:
+            return {
+                ...state,
+                response: action.payload
+            }
         default:
             return state;
     }

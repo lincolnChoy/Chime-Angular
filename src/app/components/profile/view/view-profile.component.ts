@@ -9,7 +9,7 @@ import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
 import * as fromProfile from '../store/profile.reducers';
 import * as ProfileActions from '../store/profile.actions';
-
+import { take } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-view-profile',
@@ -67,11 +67,13 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
+
 		this.store.dispatch(new ProfileActions.ClearProfile());
 		this.subscription.unsubscribe();
 	}
 
 	isViewingSelf() {
+
 		return (this.loggedUserID == this.profileID);
 	}
 
@@ -84,6 +86,32 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 			birthday: new FormControl(this.profile['birthday']),
 		})
 	}
+
+	onUpdateProfile() {
+
+		this.store.select('user').pipe(take(1)).subscribe(
+			(userState: fromAuth.State) => {
+				if (userState.user) {
+					const blurb = this.editForm.controls.about.value;
+					const occupation = this.editForm.controls.occupation.value;
+					const location = this.editForm.controls.location.value;
+					const birthday = this.editForm.controls.birthday.value;
+					const picture = null;
+
+					this.store.dispatch(new ProfileActions.SaveProfile({
+						id: userState.user['id'],
+						pw: userState.user['password'],
+						blurb: blurb,
+						occupation: occupation,
+						location: location,
+						birthday: birthday,
+						picture: picture
+					}))
+				}
+			}
+		);
+	}
+
 
 	getFullName() {
 
