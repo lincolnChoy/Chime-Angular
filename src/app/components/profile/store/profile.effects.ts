@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ADDRESS } from '../../../../constants';
 
 import * as ProfileActions from './profile.actions';
+import { Profile } from 'selenium-webdriver/firefox';
 
 @Injectable()
 export class ProfileEffects {
@@ -23,7 +24,6 @@ export class ProfileEffects {
                     const user = {
                         ...response
 					}
-					console.log('here');
 					return [
 						{
 							type: ProfileActions.LOAD_PROFILE,
@@ -48,6 +48,10 @@ export class ProfileEffects {
 						{
 							type: ProfileActions.SET_RESPONSE,
 							payload: response['code']
+						},
+						{
+							type: ProfileActions.LOAD_PROFILE,
+							payload: response['profile']
 						}
 					];
 				}

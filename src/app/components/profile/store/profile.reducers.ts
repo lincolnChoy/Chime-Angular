@@ -34,7 +34,10 @@ export function profileReducer(state = initialState, action: ProfileActions.Prof
         case ProfileActions.LOAD_PROFILE:
             return {
                 ...state,
-                profile: action.payload
+                profile: {
+                    ...state.profile,
+                    ...action.payload
+                }
             }
         case ProfileActions.CLEAR_PROFILE:
             return initialState;
