@@ -18,5 +18,5 @@ Screenshots:
 ![messaging](https://puu.sh/D155b/e7e89d514b.jpg)   
 
 
-![viewingprofile](https://puu.sh/D1572/82a1e45b35.jpg)
-![editingProfile](https://puu.sh/D1583/fb203ec5d7.jpg)
+![viewingprofile](https://puu.sh/D2tAN/72ee58cd4f.jpg)
+![editingProfile](https://puu.sh/D2tAj/8be995e78f.jpg)
