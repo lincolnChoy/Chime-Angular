@@ -72,4 +72,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	}
 
+	onPress(event) {
+		if (event.key === 'Enter') {
+			this.onLogin();
+		}
+	}
+
 }

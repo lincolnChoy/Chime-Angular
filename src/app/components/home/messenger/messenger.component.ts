@@ -39,8 +39,10 @@ export class MessengerComponent implements OnInit {
 	/* Boolean to determine visual state */
 	private userSet: boolean = false;
 
-
 	private messageForm: FormGroup;
+
+	private showZoom: boolean = false;
+	private zoomImage: string;
 
 
 	constructor(private store: Store<fromApp.AppState>, private router: Router) { 
@@ -149,6 +151,11 @@ export class MessengerComponent implements OnInit {
 		if (event.key === 'Enter') {
 			this.sendMessage();
 		}
+	}
+
+	onZoomImage(image) {
+		this.zoomImage = image;
+		this.showZoom = true;
 	}
 
 

@@ -15,7 +15,7 @@
 
                     <!-- Image message -->
                     <ng-template [ngIf] = "messageObject.filecode === 0 || messageObject.filecode === 1">
-                        <div className = 'msgCard pv2 ma2' >
+                        <div className = 'msgCard pv2 ma2' (click) = "onZoomImage(messageObject.message)">
                             <img className = 'br4' [src] = "messageObject.message" alt = '' width = '200px' />
                         </div>
                     </ng-template>
@@ -69,4 +69,8 @@
         <button class = 'mh1 ph3 pv2 br3 sendButton' (click) = "sendMessage()">Send</button>
         
     </div>
+</ng-template>
+
+<ng-template [ngIf] = "showZoom">
+    <img [src] = "zoomImage" height = "500px" width = "500px">
 </ng-template>

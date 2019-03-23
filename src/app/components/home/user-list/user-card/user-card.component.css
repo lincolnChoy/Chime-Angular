@@ -13,3 +13,7 @@
     background: #C5E3FF;
 }
 
+.avatar {
+    object-fit: cover;
+}
+

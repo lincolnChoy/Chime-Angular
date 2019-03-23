@@ -59,7 +59,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
         const first = this.registrationForm.controls.first.value;
         const last = this.registrationForm.controls.last.value;
-		const email = this.registrationForm.controls.email.value;
+        const email = this.registrationForm.controls.email.value;
+        
+    
         const password = this.registrationForm.controls.password.value;
         const confPassword = this.registrationForm.controls.confPassword.value;
 
@@ -67,7 +69,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 		if (!email || !password || !confPassword || !first || !last) {
 			this.error = true;
 			this.errorMessage = 'Please fill out all fields.';
-		} 
+        } 
+        else if (!this.registrationForm.controls.email.valid) {
+            this.error = true;
+            this.errorMessage = 'Please enter a valid email';
+        }
 		/* Form is fine */
 		else {
 			this.error = false;
