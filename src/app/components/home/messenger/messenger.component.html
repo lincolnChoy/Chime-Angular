@@ -34,7 +34,8 @@
                         <div class = 'msgCard receiver ph3 pv3 ma2' 
                             [ngClass] = "{ 
                                         'receiver': !isSending(messageObject),
-                                        'sender': isSending(messageObject)
+                                        'sender': isSending(messageObject),
+                                        'temporary' : (messageObject.isTemp === true)
                             }">
                             {{ messageObject.message }}
                         </div>

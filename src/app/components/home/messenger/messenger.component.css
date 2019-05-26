@@ -81,3 +81,7 @@
 	justify-content: flex-start;
 	align-items: center;
 }
+
+.temporary {
+	opacity: 0.7
+}

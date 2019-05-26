@@ -39,14 +39,12 @@ export class MessengerEffects {
                         return this.httpClient.post(`${ADDRESS}/sendMessage`, { ...sendData });
                     })
                     ,mergeMap((response) => {
-                        if (response['code'] === 0) {
-                            return [
-                                {
-                                    type: MessengerActions.LOAD_MESSAGES,
-                                    payload: response['messages']
-                                }
-                            ];
-                        }
+                        return [
+                            {
+                                type: MessengerActions.SET_RESPONSE,
+                                payload: response['code']
+                            }
+                        ];
                     }));
 
     constructor(private actions$: Actions,private httpClient: HttpClient) {}

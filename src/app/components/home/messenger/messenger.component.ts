@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { FormGroup, FormControl } from '@angular/forms';
@@ -34,7 +34,8 @@ export class MessengerComponent implements OnInit {
 	private user: any = null;
 
 	/* Message array to store messages when fetched */
-	private messages = []
+	private messages = [];
+	private tempMessages = [];
 
 	/* Boolean to determine visual state */
 	private userSet: boolean = false;
@@ -43,6 +44,8 @@ export class MessengerComponent implements OnInit {
 
 	private showZoom: boolean = false;
 	private zoomImage: string;
+
+
 
 
 	constructor(private store: Store<fromApp.AppState>, private router: Router) { 
@@ -75,12 +78,24 @@ export class MessengerComponent implements OnInit {
 					/* Set target */
 					this.target = state.messageTarget;
 
+					/* Clear messages */
+					this.messages = [];
+
 					/* Fetch messages */
 					this.store.dispatch(new MessengerActions.GetMessages({ 
 						sender: this.user.id,
 						destination: this.target.id,
 						isGroup: false,
 						pw: this.user.password
+					}));
+
+					this.subscription.add(interval(1000).subscribe((x) => {
+						this.store.dispatch(new MessengerActions.GetMessages({ 
+							sender: this.user.id,
+							destination: this.target.id,
+							isGroup: false,
+							pw: this.user.password
+						}));
 					}));
 				}
 					
@@ -90,14 +105,25 @@ export class MessengerComponent implements OnInit {
 
 		this.subscription.add(this.store.select('messenger').subscribe(
 			(messagesState: fromMessenger.State) => {
-				this.messages = messagesState.messages;
-				/* Not sure why the 0s timeout is necessary but it works */ 
-				setTimeout(() => {
-					this.scrollToBottom();
-				},0);
-				
+				// TODO:
+				// This block assumes that the response code comes from the sent message API,
+				// It should check which API was called, the code could be coming from /getMessages, could lead to buggy behaviour
+				if (messagesState.response === 0) {
+					for (let message of this.messages) {
+						message.isTemp = false;
+					} 
+				}
+				if (messagesState.messages.length >= this.messages.length) {
+					this.messages = messagesState.messages;
+					/* Not sure why the 0s timeout is necessary but it works */ 
+					setTimeout(() => {
+						this.scrollToBottom();
+					},0);
+				}		
 			}
 		));
+
+
 		
 	}
 
@@ -113,6 +139,7 @@ export class MessengerComponent implements OnInit {
 		reader.onload = () => {
 
 			var fileData = reader.result.toString();
+			console.log(fileData);
 			this.store.dispatch(new MessengerActions.SendMessage({
 				sender: this.user.id,
 				destination: this.target.id,
@@ -173,6 +200,23 @@ export class MessengerComponent implements OnInit {
 				isFile: false,
 				// Hardcoded for now
 				isGroup: false,
+			}));
+			this.messages.push({
+				sender: this.user.id,
+				destination: this.target.id,
+				message: message,
+				isFile: false,
+				filecode: 10,
+				isTemp: true,
+				// Hardcoded for now
+				isGroup: false,
+			});
+
+			this.store.dispatch(new MessengerActions.GetMessages({ 
+				sender: this.user.id,
+				destination: this.target.id,
+				isGroup: false,
+				pw: this.user.password
 			}));
 			
 			/* Clear input field after sending */
