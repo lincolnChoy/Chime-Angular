@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription, interval } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
 	styleUrls: ['./messenger.component.css']
 })
 
-export class MessengerComponent implements OnInit {
+export class MessengerComponent implements OnInit, OnDestroy {
 
 	
 	private subscription: Subscription;
@@ -89,19 +89,23 @@ export class MessengerComponent implements OnInit {
 						pw: this.user.password
 					}));
 
-					this.subscription.add(interval(1000).subscribe((x) => {
-						this.store.dispatch(new MessengerActions.GetMessages({ 
-							sender: this.user.id,
-							destination: this.target.id,
-							isGroup: false,
-							pw: this.user.password
-						}));
-					}));
+
 				}
+
 					
 			}
+
 			
 		);
+
+		this.subscription.add(interval(1000).subscribe((x) => {
+			this.store.dispatch(new MessengerActions.GetMessages({ 
+				sender: this.user.id,
+				destination: this.target.id,
+				isGroup: false,
+				pw: this.user.password
+			}));
+		}));
 
 		this.subscription.add(this.store.select('messenger').subscribe(
 			(messagesState: fromMessenger.State) => {
@@ -122,10 +126,14 @@ export class MessengerComponent implements OnInit {
 				}		
 			}
 		));
-
-
 		
 	}
+
+	ngOnDestroy() {
+		this.subscription.unsubscribe();
+	}
+
+	
 
 	uploadFile(event) {
 
