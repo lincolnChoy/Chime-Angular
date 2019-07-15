@@ -9,14 +9,13 @@ Website may feel slow sometimes as the back-end server is deployed with a free p
 
 Screenshots:    
 
-![signInPage](https://puu.sh/D150d/72a9a5ed37.jpg)    
+![signInPage](https://i.imgur.com/EmRwgji.png)    
 
-![registrationPage](https://puu.sh/D151x/0ad1fb62d8.jpg)    
+![registrationPage](https://i.imgur.com/JkGD9Fp.png)    
 
-![homePage](https://puu.sh/D152q/0b2dfad3c0.jpg)    
+![homePage](https://i.imgur.com/Tssootq.png)    
 
-![messaging](https://puu.sh/D155b/e7e89d514b.jpg)   
+![messaging](https://i.imgur.com/pU1hYDA.png)   
 
-
-![viewingprofile](https://puu.sh/D2tAN/72ee58cd4f.jpg)
-![editingProfile](https://puu.sh/D2tAj/8be995e78f.jpg)
+![viewingprofile](https://i.imgur.com/14vhy1H.png)
+![editingProfile](https://i.imgur.com/dTmybvR.png)
