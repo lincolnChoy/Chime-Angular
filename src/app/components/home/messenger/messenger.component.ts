@@ -147,7 +147,6 @@ export class MessengerComponent implements OnInit, OnDestroy {
 		reader.onload = () => {
 
 			var fileData = reader.result.toString();
-			console.log(fileData);
 			this.store.dispatch(new MessengerActions.SendMessage({
 				sender: this.user.id,
 				destination: this.target.id,
